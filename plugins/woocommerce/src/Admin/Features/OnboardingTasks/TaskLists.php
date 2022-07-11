@@ -121,8 +121,7 @@ class TaskLists {
 					'Appearance',
 				),
 				'event_prefix' => 'tasklist_',
-				'visible'      => ! self::is_experiment_treatment( 'woocommerce_tasklist_setup_experiment_1' )
-					&& ! self::is_experiment_treatment( 'woocommerce_tasklist_setup_experiment_2' ),
+				'visible'      => false,
 			)
 		);
 
@@ -147,7 +146,7 @@ class TaskLists {
 				'options'                 => array(
 					'use_completed_title' => true,
 				),
-				'visible'                 => self::is_experiment_treatment( 'woocommerce_tasklist_setup_experiment_1' ),
+				'visible'                 => true,
 			)
 		);
 
@@ -169,8 +168,7 @@ class TaskLists {
 					'Appearance',
 				),
 				'event_prefix'            => 'tasklist_',
-				'visible'                 => self::is_experiment_treatment( 'woocommerce_tasklist_setup_experiment_2' )
-					&& ! self::is_experiment_treatment( 'woocommerce_tasklist_setup_experiment_1' ),
+				'visible'                 => false,
 				'options'                 => array(
 					'use_completed_title' => true,
 				),
@@ -280,6 +278,20 @@ class TaskLists {
 				'extended_two_column',
 				new ReviewShippingOptions(
 					self::get_list( 'extended_two_column' )
+				)
+			);
+
+			// Tasklist that will never be shown in homescreen,
+			// used for having tasks that are accessed by other means.
+			self::add_list(
+				array(
+					'id'           => 'secret_tasklist',
+					'hidden_id'    => 'secret',
+					'tasks'        => array(
+						'ExperimentalShippingRecommendation',
+					),
+					'event_prefix' => 'secret_tasklist_',
+					'visible'      => false,
 				)
 			);
 		}

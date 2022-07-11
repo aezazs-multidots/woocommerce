@@ -56,6 +56,23 @@ class DataSynchronizer implements BatchProcessorInterface {
 	private $posts_to_cot_migrator;
 
 	/**
+	 * Class constructor.
+	 */
+	public function __construct() {
+		// When posts is authoritative and sync is enabled, deleting a post also deletes COT data.
+		add_action(
+			'deleted_post',
+			function( $postid, $post ) {
+				if ( 'shop_order' === $post->post_type && ! $this->custom_orders_table_is_authoritative() && $this->data_sync_is_enabled() ) {
+					$this->data_store->delete_order_data_from_custom_order_tables( $postid );
+				}
+			},
+			10,
+			2
+		);
+	}
+
+	/**
 	 * Class initialization, invoked by the DI container.
 	 *
 	 * @param OrdersTableDataStore             $data_store The data store to use.
