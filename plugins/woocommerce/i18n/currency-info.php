@@ -5,7 +5,7 @@
  * @package WooCommerce\i18n
  * @version 5.7.0
  */
- 
+
 defined( 'ABSPATH' ) || exit;
 
 $global_formats = array(
