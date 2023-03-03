@@ -8,6 +8,9 @@
 
 defined( 'ABSPATH' ) || exit;
 
+
+
+
 $global_formats = array(
 	'ls_comma_dot_ltr'   => array(
 		'thousand_sep' => '.',
